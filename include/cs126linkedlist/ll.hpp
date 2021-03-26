@@ -6,15 +6,20 @@
 #include <utility>
 #include <vector>
 
-// TODO(you): Implement these methods.
-
 namespace cs126linkedlist {
 
 template <typename ElementType>
-LinkedList<ElementType>::LinkedList() {}
+LinkedList<ElementType>::LinkedList() {
+  //TODO make sure this is right
+  start_node = nullptr;
+}
 
 template <typename ElementType>
-LinkedList<ElementType>::LinkedList(const std::vector<ElementType>& values) {}
+LinkedList<ElementType>::LinkedList(const std::vector<ElementType>& values) {
+  for (size_t i = values.size(); i >= 0; i--) {
+    push_front(values.at(i));
+  }
+}
 
 // Copy constructor
 template <typename ElementType>
@@ -38,10 +43,14 @@ LinkedList<ElementType>& LinkedList<ElementType>::operator=(
 // Move assignment operator
 template <typename ElementType>
 LinkedList<ElementType>& LinkedList<ElementType>::operator=(
-    LinkedList<ElementType>&& source) noexcept {}
+    LinkedList<ElementType>&& source) noexcept {
+}
 
 template <typename ElementType>
-void LinkedList<ElementType>::push_front(const ElementType& value) {}
+void LinkedList<ElementType>::push_front(const ElementType& value) {
+  //TODO make sure this is right
+  start_node = new Node(value, start_node);
+}
 
 template <typename ElementType>
 void LinkedList<ElementType>::push_back(const ElementType& value) {}
