@@ -29,12 +29,27 @@ TEST_CASE("Push Back", "[constructor][push_back][size][empty]") {
   }
 }
 
-TEST_CASE("Big Five") {
-  SECTION("Constructor that takes in a vector") {
+TEST_CASE("Empty and size") {
+  SECTION("empty") {
+    LinkedList<int> list;
+    REQUIRE(list.empty());
+  }
+  SECTION("size") {
     std::vector<int> vector(5,6);
     LinkedList<int> list(vector);
     REQUIRE(list.size() == 5);
   }
+}
+
+TEST_CASE("Insertions") {
+  SECTION("push_front") {
+    LinkedList<int> list;
+    list.push_front(5);
+    REQUIRE(list.front() == 5);
+  }
+}
+
+TEST_CASE("Big Five") {
   SECTION ("Copy constructor") {
 
   }
