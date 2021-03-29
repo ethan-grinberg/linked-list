@@ -11,7 +11,7 @@ namespace cs126linkedlist {
 template <typename ElementType>
 LinkedList<ElementType>::LinkedList() {
   //TODO make sure this is right
-  start_node = nullptr;
+  start_node_ = nullptr;
 }
 
 template <typename ElementType>
@@ -33,7 +33,8 @@ LinkedList<ElementType>::LinkedList(LinkedList<ElementType>&& source) noexcept {
 
 // Destructor
 template <typename ElementType>
-LinkedList<ElementType>::~LinkedList() {}
+LinkedList<ElementType>::~LinkedList() {
+}
 
 // Copy assignment operator
 template <typename ElementType>
@@ -49,14 +50,16 @@ LinkedList<ElementType>& LinkedList<ElementType>::operator=(
 template <typename ElementType>
 void LinkedList<ElementType>::push_front(const ElementType& value) {
   //TODO make sure this is right
-  start_node = new Node(value, start_node);
+  start_node_ = new Node(value, start_node_);
 }
 
 template <typename ElementType>
 void LinkedList<ElementType>::push_back(const ElementType& value) {}
 
 template <typename ElementType>
-ElementType LinkedList<ElementType>::front() const {}
+ElementType LinkedList<ElementType>::front() const {
+  return start_node_;
+}
 
 template <typename ElementType>
 ElementType LinkedList<ElementType>::back() const {}
@@ -96,20 +99,34 @@ bool LinkedList<ElementType>::operator!=(
 
 template <typename ElementType>
 typename LinkedList<ElementType>::iterator& LinkedList<ElementType>::iterator::
-operator++() {}
+operator++() {
+  current_ = current_->next_;
+  return *this;
+}
 
 template <typename ElementType>
-ElementType& LinkedList<ElementType>::iterator::operator*() const {}
+ElementType& LinkedList<ElementType>::iterator::operator*() const {
+  //TODO may have to do something special to return by reference
+  Node value = this->current_->value_;
+  return value;
+}
 
 template <typename ElementType>
 bool LinkedList<ElementType>::iterator::operator!=(
-    const typename LinkedList<ElementType>::iterator& other) const {}
+    const typename LinkedList<ElementType>::iterator& other) const {
+  //TODO may also need to change, not to compare values
+  return current_->value_ != other.current_->value_;
+}
 
 template <typename ElementType>
-typename LinkedList<ElementType>::iterator LinkedList<ElementType>::begin() {}
+typename LinkedList<ElementType>::iterator LinkedList<ElementType>::begin() {
+  return iterator(start_node_);
+}
 
 template <typename ElementType>
-typename LinkedList<ElementType>::iterator LinkedList<ElementType>::end() {}
+typename LinkedList<ElementType>::iterator LinkedList<ElementType>::end() {
+  return nullptr;
+}
 
 template <typename ElementType>
 typename LinkedList<ElementType>::const_iterator&

@@ -31,7 +31,7 @@ class LinkedList {
   };
 
  private:
-  Node* start_node;
+  Node* start_node_;
 
  // DO NOT CHANGE THE PUBLIC INTERFACE OF THIS CLASS!
  public:
