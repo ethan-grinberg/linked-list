@@ -12,13 +12,16 @@ template <typename ElementType>
 LinkedList<ElementType>::LinkedList() {
   //TODO make sure this is right
   start_node_ = nullptr;
+  size_ = 0;
 }
 
 template <typename ElementType>
 LinkedList<ElementType>::LinkedList(const std::vector<ElementType>& values) {
-  for (size_t i = values.size(); i >= 0; i--) {
+  start_node_ = nullptr;
+  for (int i = values.size() - 1; i >= 0; i--) {
     push_front(values.at(i));
   }
+  size_ = values.size();
 }
 
 // Copy constructor
@@ -34,6 +37,12 @@ LinkedList<ElementType>::LinkedList(LinkedList<ElementType>&& source) noexcept {
 // Destructor
 template <typename ElementType>
 LinkedList<ElementType>::~LinkedList() {
+  Node* current = start_node_;
+  while (current != nullptr) {
+    Node* next = current->next_;
+    delete current;
+    current = next;
+  }
 }
 
 // Copy assignment operator
@@ -49,7 +58,6 @@ LinkedList<ElementType>& LinkedList<ElementType>::operator=(
 
 template <typename ElementType>
 void LinkedList<ElementType>::push_front(const ElementType& value) {
-  //TODO make sure this is right
   start_node_ = new Node(value, start_node_);
 }
 
@@ -58,7 +66,7 @@ void LinkedList<ElementType>::push_back(const ElementType& value) {}
 
 template <typename ElementType>
 ElementType LinkedList<ElementType>::front() const {
-  return start_node_;
+  return start_node_->value_;
 }
 
 template <typename ElementType>
@@ -71,10 +79,17 @@ template <typename ElementType>
 void LinkedList<ElementType>::pop_back() {}
 
 template <typename ElementType>
-size_t LinkedList<ElementType>::size() const {}
+size_t LinkedList<ElementType>::size() const {
+  return size_;
+}
 
 template <typename ElementType>
-bool LinkedList<ElementType>::empty() const {}
+bool LinkedList<ElementType>::empty() const {
+  if (size_ == 0) {
+    return true;
+  }
+  return false;
+}
 
 template <typename ElementType>
 void LinkedList<ElementType>::clear() {}
@@ -107,8 +122,7 @@ operator++() {
 template <typename ElementType>
 ElementType& LinkedList<ElementType>::iterator::operator*() const {
   //TODO may have to do something special to return by reference
-  Node value = this->current_->value_;
-  return value;
+  return this->current_->value_;
 }
 
 template <typename ElementType>

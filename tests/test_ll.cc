@@ -29,4 +29,24 @@ TEST_CASE("Push Back", "[constructor][push_back][size][empty]") {
   }
 }
 
-// TODO(you): Add more tests below.
+TEST_CASE("Big Five") {
+  SECTION("Constructor that takes in a vector") {
+    std::vector<int> vector(5,6);
+    LinkedList<int> list(vector);
+    REQUIRE(list.size() == 5);
+  }
+  SECTION ("Copy constructor") {
+
+  }
+  SECTION ("Move constructor") {
+
+  }
+
+  SECTION("Copy assignment operator") {
+
+  }
+
+  SECTION("Move assignment operator") {
+
+  }
+}
