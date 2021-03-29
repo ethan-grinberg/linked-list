@@ -26,7 +26,8 @@ LinkedList<ElementType>::LinkedList(const std::vector<ElementType>& values) {
 
 // Copy constructor
 template <typename ElementType>
-LinkedList<ElementType>::LinkedList(const LinkedList<ElementType>& source) {}
+LinkedList<ElementType>::LinkedList(const LinkedList<ElementType>& source) {
+}
 
 // Move constructor
 template <typename ElementType>
@@ -59,10 +60,22 @@ LinkedList<ElementType>& LinkedList<ElementType>::operator=(
 template <typename ElementType>
 void LinkedList<ElementType>::push_front(const ElementType& value) {
   start_node_ = new Node(value, start_node_);
+  size_++;
 }
 
 template <typename ElementType>
-void LinkedList<ElementType>::push_back(const ElementType& value) {}
+void LinkedList<ElementType>::push_back(const ElementType& value) {
+  if (size_ == 0) {
+    start_node_ = new Node(value, start_node_);
+  } else {
+    Node* next_node = start_node_;
+    for (size_t i = 0; i < size_ - 1; i++) {
+      next_node = next_node->next_;
+    }
+    next_node->next_ = new Node(value, next_node->next_);
+  }
+  size_++;
+}
 
 template <typename ElementType>
 ElementType LinkedList<ElementType>::front() const {
@@ -70,7 +83,13 @@ ElementType LinkedList<ElementType>::front() const {
 }
 
 template <typename ElementType>
-ElementType LinkedList<ElementType>::back() const {}
+ElementType LinkedList<ElementType>::back() const {
+  Node* last_node = start_node_;
+  for (size_t i = 0; i < size_ - 1; i++) {
+    last_node = last_node->next_;
+  }
+  return last_node->value_;
+}
 
 template <typename ElementType>
 void LinkedList<ElementType>::pop_front() {}

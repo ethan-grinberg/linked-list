@@ -29,7 +29,7 @@ TEST_CASE("Push Back", "[constructor][push_back][size][empty]") {
   }
 }
 
-TEST_CASE("Empty and size") {
+TEST_CASE("Empty, size, front, and back") {
   SECTION("empty") {
     LinkedList<int> list;
     REQUIRE(list.empty());
@@ -38,6 +38,11 @@ TEST_CASE("Empty and size") {
     std::vector<int> vector(5,6);
     LinkedList<int> list(vector);
     REQUIRE(list.size() == 5);
+  }
+  SECTION("size") {
+    std::vector<int> vector = {1,2,3,4};
+    LinkedList<int> list(vector);
+    REQUIRE(list.back() == 4);
   }
 }
 
