@@ -147,4 +147,16 @@ TEST_CASE("Remove functions") {
     REQUIRE(list.size() == 3);
     REQUIRE(list.back() == 7);
   }
+  SECTION("remove n") {
+    std::vector<int> vector = {5, 5, 7, 5};
+    LinkedList<int> list(vector);
+    REQUIRE(list.size() == 4);
+
+    list.RemoveNth(2);
+    REQUIRE(list.size() == 3);
+    for (LinkedList<int>::iterator itr = list.begin(); itr != list.end();
+         ++itr) {
+      REQUIRE(*itr == 5);
+    }
+  }
 }

@@ -158,7 +158,21 @@ std::ostream& operator<<(std::ostream& os,
 }
 
 template <typename ElementType>
-void LinkedList<ElementType>::RemoveNth(size_t n) {}
+void LinkedList<ElementType>::RemoveNth(size_t n) {
+  if (n == 0) {
+    pop_front();
+    return;
+  }
+  Node* previous_node = start_node_;
+  for (size_t i = 0; i < n - 1; i++) {
+    previous_node = previous_node->next_;
+  }
+
+  Node* del_node = previous_node->next_;
+  previous_node->next_ = previous_node->next_->next_;
+  delete del_node;
+  size_--;
+}
 
 template <typename ElementType>
 void LinkedList<ElementType>::RemoveOdd() {}
