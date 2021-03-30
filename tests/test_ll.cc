@@ -30,7 +30,7 @@ TEST_CASE("Push Back", "[constructor][push_back][size][empty]") {
   }
 }
 
-TEST_CASE("Empty, size, front, and back") {
+TEST_CASE("Empty, size, and back") {
   SECTION("empty") {
     LinkedList<int> list;
     REQUIRE(list.empty());
@@ -40,15 +40,15 @@ TEST_CASE("Empty, size, front, and back") {
     LinkedList<int> list(vector);
     REQUIRE(list.size() == 5);
   }
-  SECTION("size") {
+  SECTION("back") {
     std::vector<int> vector = {1,2,3,4};
     LinkedList<int> list(vector);
     REQUIRE(list.back() == 4);
   }
 }
 
-TEST_CASE("Add to front") {
-  SECTION("push_front") {
+TEST_CASE("push_front") {
+  SECTION("front()") {
     LinkedList<int> list;
     list.push_front(5);
     REQUIRE(list.front() == 5);
@@ -82,6 +82,35 @@ TEST_CASE("Iterators") {
     }
   }
   SECTION("const iterator") {
+    std::vector<int> vector(4, 7);
+    const LinkedList<int> list(vector);
+    for (LinkedList<int>::const_iterator itr = list.begin(); itr != list.end();
+         ++itr) {
+      REQUIRE(*itr == 7);
+    }
+  }
+}
 
+TEST_CASE("Equality") {
+  SECTION("==") {
+    std::vector<int> vector1 = {1,2,3,4};
+    LinkedList<int> list1(vector1);
+    std::vector<int> vector2 = {1,2,3,4};
+    LinkedList<int> list2(vector2);
+    REQUIRE(list1 == list2);
+  }
+  SECTION("!=") {
+    std::vector<int> vector1 = {1,2,3,4};
+    LinkedList<int> list1(vector1);
+    std::vector<int> vector2 = {1,2,3,6};
+    LinkedList<int> list2(vector2);
+    REQUIRE(list1 != list2);
+  }
+  SECTION("Different size") {
+    std::vector<int> vector1 = {1,2,3,4};
+    LinkedList<int> list1(vector1);
+    std::vector<int> vector2 = {1,2,3,4,5};
+    LinkedList<int> list2(vector2);
+    REQUIRE(list1 != list2);
   }
 }
