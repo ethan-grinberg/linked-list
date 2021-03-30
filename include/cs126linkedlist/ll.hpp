@@ -97,10 +97,23 @@ ElementType LinkedList<ElementType>::back() const {
 }
 
 template <typename ElementType>
-void LinkedList<ElementType>::pop_front() {}
+void LinkedList<ElementType>::pop_front() {
+  if (size_ == 0) {
+    return;
+  }
+  Node* current_start = start_node_;
+  start_node_ = start_node_->next_;
+  delete current_start;
+  size_--;
+}
 
 template <typename ElementType>
-void LinkedList<ElementType>::pop_back() {}
+void LinkedList<ElementType>::pop_back() {
+  if (size_ == 0) {
+    return;
+  }
+  size_--;
+}
 
 template <typename ElementType>
 size_t LinkedList<ElementType>::size() const {
