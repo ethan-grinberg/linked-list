@@ -148,7 +148,7 @@ template <typename ElementType>
 bool LinkedList<ElementType>::iterator::operator!=(
     const typename LinkedList<ElementType>::iterator& other) const {
   //TODO may also need to change, not to compare values
-  return current_->value_ != other.current_->value_;
+  return current_ != other.current_;
 }
 
 template <typename ElementType>

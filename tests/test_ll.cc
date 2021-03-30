@@ -26,6 +26,7 @@ TEST_CASE("Push Back", "[constructor][push_back][size][empty]") {
     list.push_back(-1);
     list.push_back(10000);
     REQUIRE(list.size() == 2);
+    REQUIRE(list.back() == 10000);
   }
 }
 
@@ -46,7 +47,7 @@ TEST_CASE("Empty, size, front, and back") {
   }
 }
 
-TEST_CASE("Insertions") {
+TEST_CASE("Add to front") {
   SECTION("push_front") {
     LinkedList<int> list;
     list.push_front(5);
@@ -67,6 +68,20 @@ TEST_CASE("Big Five") {
   }
 
   SECTION("Move assignment operator") {
+
+  }
+}
+
+TEST_CASE("Iterators") {
+  SECTION("Non-const iterator") {
+    std::vector<int> vector(4, 7);
+    LinkedList<int> list(vector);
+    for (LinkedList<int>::iterator itr = list.begin(); itr != list.end();
+         ++itr) {
+      REQUIRE(*itr == 7);
+    }
+  }
+  SECTION("const iterator") {
 
   }
 }
