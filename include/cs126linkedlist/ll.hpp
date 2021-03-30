@@ -36,7 +36,10 @@ LinkedList<ElementType>::LinkedList(const LinkedList<ElementType>& source) {
 // Move constructor
 template <typename ElementType>
 LinkedList<ElementType>::LinkedList(LinkedList<ElementType>&& source) noexcept {
-
+  start_node_ = source.start_node_;
+  size_ = source.size_;
+  source.start_node_ = nullptr;
+  source.size_ = 0;
 }
 
 // Destructor
@@ -68,6 +71,15 @@ LinkedList<ElementType>& LinkedList<ElementType>::operator=(
 template <typename ElementType>
 LinkedList<ElementType>& LinkedList<ElementType>::operator=(
     LinkedList<ElementType>&& source) noexcept {
+  if (*this == source) {
+    return *this;
+  }
+  clear();
+  start_node_ = source.start_node_;
+  size_ = source.size_;
+  source.size_ = 0;
+  source.start_node_ = nullptr;
+  return *this;
 }
 
 template <typename ElementType>

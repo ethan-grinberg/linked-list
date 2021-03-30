@@ -72,6 +72,15 @@ TEST_CASE("Big Five") {
 
   }
   SECTION ("Move constructor") {
+    std::vector<int> vector(5,6);
+    LinkedList<int> list(vector);
+    REQUIRE(list.size() == 5);
+
+    LinkedList<int> new_list;
+
+    new_list = std::move(list);
+    REQUIRE(new_list.size() == 5);
+    REQUIRE(list.size() == 0);
   }
 
   SECTION("Copy assignment operator") {
