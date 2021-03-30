@@ -58,6 +58,17 @@ TEST_CASE("push_front") {
 
 TEST_CASE("Big Five") {
   SECTION ("Copy constructor") {
+    std::vector<int> vector(5,6);
+    LinkedList<int> list(vector);
+    REQUIRE(list.size() == 5);
+
+    LinkedList<int> new_list(list);
+    REQUIRE(new_list.size() == 5);
+
+    for (LinkedList<int>::iterator itr = list.begin(); itr != list.end();
+         ++itr) {
+      REQUIRE(*itr == 6);
+    }
 
   }
   SECTION ("Move constructor") {
@@ -154,6 +165,18 @@ TEST_CASE("Remove functions") {
 
     list.RemoveNth(2);
     REQUIRE(list.size() == 3);
+    for (LinkedList<int>::iterator itr = list.begin(); itr != list.end();
+         ++itr) {
+      REQUIRE(*itr == 5);
+    }
+  }
+  SECTION("remove odd") {
+    std::vector<int> vector = {5, 9, 5, 7};
+    LinkedList<int> list(vector);
+    REQUIRE(list.size() == 4);
+
+    list.RemoveOdd();
+    REQUIRE(list.size() == 2);
     for (LinkedList<int>::iterator itr = list.begin(); itr != list.end();
          ++itr) {
       REQUIRE(*itr == 5);

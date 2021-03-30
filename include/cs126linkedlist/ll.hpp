@@ -26,6 +26,11 @@ LinkedList<ElementType>::LinkedList(const std::vector<ElementType>& values) {
 // Copy constructor
 template <typename ElementType>
 LinkedList<ElementType>::LinkedList(const LinkedList<ElementType>& source) {
+  start_node_ = nullptr;
+  size_ = 0;
+  for (const_iterator itr = source.begin(); itr != source.end(); ++itr) {
+    push_back(*itr);
+  }
 }
 
 // Move constructor
@@ -175,7 +180,15 @@ void LinkedList<ElementType>::RemoveNth(size_t n) {
 }
 
 template <typename ElementType>
-void LinkedList<ElementType>::RemoveOdd() {}
+void LinkedList<ElementType>::RemoveOdd() {
+  //TODO probably need to make a copy
+  if (size_ == 0) {
+    return;
+  }
+  size_t previous_size = size_;
+  for (size_t i = 0; i < previous_size; i++) {
+  }
+}
 
 template <typename ElementType>
 bool LinkedList<ElementType>::operator==(
