@@ -138,4 +138,13 @@ TEST_CASE("Remove functions") {
     REQUIRE(list.size() == 3);
     REQUIRE(list.front() == 6);
   }
+  SECTION("pop_back") {
+    std::vector<int> vector = {5, 6, 7, 8};
+    LinkedList<int> list(vector);
+    REQUIRE(list.size() == 4);
+    REQUIRE(list.back() == 8);
+    list.pop_back();
+    REQUIRE(list.size() == 3);
+    REQUIRE(list.back() == 7);
+  }
 }
