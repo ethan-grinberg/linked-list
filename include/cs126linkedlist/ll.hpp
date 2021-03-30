@@ -210,7 +210,19 @@ void LinkedList<ElementType>::RemoveNth(size_t n) {
 
 template <typename ElementType>
 void LinkedList<ElementType>::RemoveOdd() {
-  //TODO
+  LinkedList<ElementType> list;
+  Node* current = start_node_;
+  size_t index = 0;
+  while (current != nullptr) {
+    if ((index % 2) == 0) {
+      list.push_back(current->value_);
+    }
+    index++;
+    Node* next = current->next_;
+    current = next;
+  }
+
+  *this = list;
 }
 
 template <typename ElementType>
