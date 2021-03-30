@@ -61,7 +61,7 @@ LinkedList<ElementType>& LinkedList<ElementType>::operator=(
     return *this;
   }
   clear();
-  for (ElementType element : source) {
+  for (const ElementType& element : source) {
     push_back(element);
   }
   return *this;
@@ -179,7 +179,15 @@ void LinkedList<ElementType>::clear() {
 template <typename ElementType>
 std::ostream& operator<<(std::ostream& os,
                          const LinkedList<ElementType>& list) {
-  //TODO finish implementing
+  size_t count = 0;
+  for (const ElementType& element : list) {
+    if (count == list.size() - 1) {
+      os<<element;
+      break;
+    }
+    os<<element<<", ";
+    count++;
+  }
   return os;
 }
 
@@ -202,13 +210,7 @@ void LinkedList<ElementType>::RemoveNth(size_t n) {
 
 template <typename ElementType>
 void LinkedList<ElementType>::RemoveOdd() {
-  //TODO probably need to make a copy
-  if (size_ == 0) {
-    return;
-  }
-  size_t previous_size = size_;
-  for (size_t i = 0; i < previous_size; i++) {
-  }
+  //TODO
 }
 
 template <typename ElementType>

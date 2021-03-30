@@ -71,7 +71,7 @@ TEST_CASE("Big Five") {
     }
 
   }
-  SECTION ("Move constructor") {
+  SECTION ("Move constructor/ move assignment operator") {
     std::vector<int> vector(5,6);
     LinkedList<int> list(vector);
     REQUIRE(list.size() == 5);
@@ -99,10 +99,6 @@ TEST_CASE("Big Five") {
          ++itr) {
       REQUIRE(*itr == 6);
     }
-  }
-
-  SECTION("Move assignment operator") {
-
   }
 }
 
@@ -204,4 +200,13 @@ TEST_CASE("Remove functions") {
       REQUIRE(*itr == 5);
     }
   }
+}
+
+TEST_CASE("<< operator") {
+  std::vector<int> vector = {5, 9, 5, 7};
+  LinkedList<int> list(vector);
+
+  std::stringstream ss;
+  ss << list;
+  REQUIRE(ss.str() == "5, 9, 5, 7");
 }
