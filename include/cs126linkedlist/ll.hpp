@@ -53,7 +53,16 @@ LinkedList<ElementType>::~LinkedList() {
 // Copy assignment operator
 template <typename ElementType>
 LinkedList<ElementType>& LinkedList<ElementType>::operator=(
-    const LinkedList<ElementType>& source) {}
+    const LinkedList<ElementType>& source) {
+  if (*this == source) {
+    return *this;
+  }
+  clear();
+  for (ElementType element : source) {
+    push_back(element);
+  }
+  return *this;
+}
 
 // Move assignment operator
 template <typename ElementType>

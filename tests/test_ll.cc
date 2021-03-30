@@ -65,18 +65,31 @@ TEST_CASE("Big Five") {
     LinkedList<int> new_list(list);
     REQUIRE(new_list.size() == 5);
 
-    for (LinkedList<int>::iterator itr = list.begin(); itr != list.end();
+    for (LinkedList<int>::iterator itr = new_list.begin(); itr != new_list.end();
          ++itr) {
       REQUIRE(*itr == 6);
     }
 
   }
   SECTION ("Move constructor") {
-
   }
 
   SECTION("Copy assignment operator") {
+    std::vector<int> vector(5,6);
+    LinkedList<int> list(vector);
+    REQUIRE(list.size() == 5);
 
+    std::vector<int> vector2 = {1,2};
+    LinkedList<int> new_list(vector2);
+    REQUIRE(new_list.size() == 2);
+
+    new_list = list;
+
+    REQUIRE(new_list.size() == 5);
+    for (LinkedList<int>::iterator itr = new_list.begin(); itr != new_list.end();
+         ++itr) {
+      REQUIRE(*itr == 6);
+    }
   }
 
   SECTION("Move assignment operator") {
