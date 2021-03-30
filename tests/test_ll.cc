@@ -52,6 +52,7 @@ TEST_CASE("push_front") {
     LinkedList<int> list;
     list.push_front(5);
     REQUIRE(list.front() == 5);
+    REQUIRE(list.size() == 1);
   }
 }
 
@@ -113,4 +114,16 @@ TEST_CASE("Equality") {
     LinkedList<int> list2(vector2);
     REQUIRE(list1 != list2);
   }
+}
+
+TEST_CASE("Clear") {
+  std::vector<int> vector(4, 7);
+  LinkedList<int> list(vector);
+  list.clear();
+  REQUIRE(list.size() == 0);
+  list.push_back(10);
+  list.push_front((5));
+  REQUIRE(list.back() == 10);
+  REQUIRE(list.front() == 5);
+  REQUIRE(list.size() == 2);
 }

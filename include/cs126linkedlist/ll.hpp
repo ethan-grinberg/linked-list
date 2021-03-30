@@ -10,7 +10,6 @@ namespace cs126linkedlist {
 
 template <typename ElementType>
 LinkedList<ElementType>::LinkedList() {
-  //TODO make sure this is right
   start_node_ = nullptr;
   size_ = 0;
 }
@@ -79,11 +78,17 @@ void LinkedList<ElementType>::push_back(const ElementType& value) {
 
 template <typename ElementType>
 ElementType LinkedList<ElementType>::front() const {
+  if (size_ == 0) {
+    throw std::invalid_argument("no elements");
+  }
   return start_node_->value_;
 }
 
 template <typename ElementType>
 ElementType LinkedList<ElementType>::back() const {
+  if (size_ == 0) {
+    throw std::invalid_argument("no elements");
+  }
   Node* last_node = start_node_;
   for (size_t i = 0; i < size_ - 1; i++) {
     last_node = last_node->next_;
@@ -111,7 +116,19 @@ bool LinkedList<ElementType>::empty() const {
 }
 
 template <typename ElementType>
-void LinkedList<ElementType>::clear() {}
+void LinkedList<ElementType>::clear() {
+  if (size_ == 0) {
+    return;
+  }
+  Node* current = start_node_;
+  while (current != nullptr) {
+    Node* next = current->next_;
+    delete current;
+    current = next;
+  }
+  start_node_ = nullptr;
+  size_ = 0;
+}
 
 template <typename ElementType>
 std::ostream& operator<<(std::ostream& os,
