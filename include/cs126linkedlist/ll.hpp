@@ -57,6 +57,7 @@ LinkedList<ElementType>::~LinkedList() {
 template <typename ElementType>
 LinkedList<ElementType>& LinkedList<ElementType>::operator=(
     const LinkedList<ElementType>& source) {
+  //this == &source
   if (*this == source) {
     return *this;
   }
@@ -138,10 +139,12 @@ void LinkedList<ElementType>::pop_back() {
   if (size_ == 0) {
     return;
   }
+
   Node* second_to_last = start_node_;
   for (size_t i = 0; i < size_ - 2; i++) {
     second_to_last = second_to_last->next_;
   }
+
   Node* last_node = second_to_last->next_;
   second_to_last->next_ = second_to_last->next_->next_;
   delete last_node;
